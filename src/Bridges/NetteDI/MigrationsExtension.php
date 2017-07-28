@@ -86,6 +86,9 @@ class MigrationsExtension extends Nette\DI\CompilerExtension
 			if ($config['diffGenerator'] === 'doctrine') {
 				$this->configureDoctrineStructureDiffGenerator();
 			}
+			if ($config['diffGenerator'] === 'dibi') {
+				$this->configureDibiStructureDiffGenerator();
+			}
 		}
 	}
 
@@ -195,6 +198,19 @@ class MigrationsExtension extends Nette\DI\CompilerExtension
 				'@Doctrine\ORM\EntityManager',
 				$config['ignoredQueriesFile']
 			]);
+
+		$configuration = $builder->getDefinition($this->prefix('configuration'));
+		$configuration->addSetup('setStructureDiffGenerator', [$structureDiffGenerator]);
+	}
+
+	private function configureDibiStructureDiffGenerator()
+	{
+		$builder = $this->getContainerBuilder();
+		$config = $this->validateConfig($this->defaults);
+
+		$structureDiffGenerator = $builder->getDefinition($this->prefix('structureDiffGenerator'))
+			->setDynamic(FALSE)
+			->setFactory('Nextras\Migrations\Bridges\Dibi\StructureDiffGenerator');
 
 		$configuration = $builder->getDefinition($this->prefix('configuration'));
 		$configuration->addSetup('setStructureDiffGenerator', [$structureDiffGenerator]);
