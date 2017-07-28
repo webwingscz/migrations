@@ -1,5 +1,5 @@
 {
-	"name": "nextras/migrations",
+	"name": "webwings/migrations",
 	"description": "Database migrations runner",
 	"type": "library",
 	"license": "BSD-3-Clause",
@@ -35,7 +35,7 @@
 		}
 	},
 	"autoload": {
-		"psr-4": { "Nextras\\Migrations\\": "src/" },
+		"psr-4": { "Webwings\\Migrations\\": "src/" },
 		"classmap": ["src/exceptions.php", "src/deprecated"]
 	},
 	"repositories": [
