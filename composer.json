@@ -36,7 +36,7 @@
 	},
 	"autoload": {
 		"psr-4": { "Webwings\\Migrations\\": "src/" },
-		"classmap": ["src/exceptions.php", "src/deprecated"]
+		"classmap": ["src"]
 	},
 	"repositories": [
 		{
