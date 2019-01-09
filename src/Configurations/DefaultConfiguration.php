@@ -9,6 +9,7 @@
 
 namespace Nextras\Migrations\Configurations;
 
+use Nextras\Migrations\Drivers\BaseDriver;
 use Nextras\Migrations\Entities\Group;
 use Nextras\Migrations\Extensions\PhpHandler;
 use Nextras\Migrations\Extensions\SqlHandler;
@@ -54,12 +55,16 @@ class DefaultConfiguration implements IConfiguration
 	 * @param  bool    $withDummyData
 	 * @param  array   $phpParams
 	 */
-	public function __construct($dir, IDriver $driver, $withDummyData = TRUE, array $phpParams = [])
+	public function __construct($dir, IDriver $driver, $withDummyData = TRUE, array $phpParams = [], string $tableName = null)
 	{
 		$this->dir = $dir;
 		$this->driver = $driver;
 		$this->withDummyData = $withDummyData;
 		$this->phpParams = $phpParams;
+
+		if ($tableName && $driver instanceof BaseDriver) {
+		    $driver->setTableName($tableName);
+        }
 	}
 
 

@@ -124,4 +124,12 @@ abstract class BaseDriver implements IDriver
 		return $queries;
 	}
 
+    /**
+     * @param string $tableName
+     */
+    public function setTableName(string $tableName)
+    {
+        $this->tableName = $tableName;
+        return $this;
+    }
 }

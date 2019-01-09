@@ -26,6 +26,7 @@ class MigrationsExtension extends Nette\DI\CompilerExtension
 		'withDummyData' => FALSE,
 		'contentSource' => NULL, // CreateCommand::CONTENT_SOURCE_*
 		'ignoredQueriesFile' => NULL,
+        'tableName' => null,
 	];
 
 	/** @var array */
@@ -62,7 +63,7 @@ class MigrationsExtension extends Nette\DI\CompilerExtension
 
 		$configuration = $builder->addDefinition($this->prefix('configuration'))
 			->setClass('Nextras\Migrations\Configurations\DefaultConfiguration')
-			->setArguments([$config['dir'], $driver, $config['withDummyData'], $config['phpParams']]);
+			->setArguments([$config['dir'], $driver, $config['withDummyData'], $config['phpParams'], $config['tableName']]);
 
 		$builder->addExcludedClasses(['Nextras\Migrations\Bridges\SymfonyConsole\BaseCommand']);
 		$builder->addDefinition($this->prefix('continueCommand'))
